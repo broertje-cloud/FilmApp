@@ -1,3 +1,4 @@
+import 'package:film_app/presentation/pages/movie_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:film_app/domain/movie_provider.dart';
@@ -46,9 +47,16 @@ class _MovieListPageState extends ConsumerState<MovieListPage> {
           // Display Movies
           Expanded(
             child: movieState.when(
-              loading: () => const Center(child: CircularProgressIndicator()),
-              error: (error, stackTrace) => Center(child: Text("Error: $error")),
+              loading: () {
+                print("⏳ Loading movies...");
+                return const Center(child: CircularProgressIndicator());
+              },
+              error: (error, stackTrace) {
+                print("❌ UI Error: $error");
+                return Center(child: Text("Error: $error")); // Show error message on screen
+              },
               data: (movies) {
+                print("📃 UI Received ${movies.length} movies");
                 if (movies.isEmpty) {
                   return const Center(child: Text("No movies found."));
                 }
@@ -66,14 +74,21 @@ class _MovieListPageState extends ConsumerState<MovieListPage> {
                       title: Text(movie.title),
                       subtitle: Text(movie.year),
                       onTap: () {
-                        // TODO: Navigate to Movie Details Page
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MovieDetailPage(imdbID: movie.imdbID),
+                          ),
+                        );
                       },
+
                     );
                   },
                 );
               },
             ),
           ),
+
         ],
       ),
     );

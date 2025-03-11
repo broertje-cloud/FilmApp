@@ -12,20 +12,22 @@ final movieRepositoryProvider = Provider((ref) {
 class MovieSearchNotifier extends StateNotifier<AsyncValue<List<MovieModel>>> {
   final MovieRepository repository;
 
-  /// Constructor that initializes the repository and starts with an empty state.
-  MovieSearchNotifier(this.repository) : super(const AsyncValue.loading());
+  MovieSearchNotifier(this.repository) : super(const AsyncValue.data([])); // Default state is an empty list
 
-  /// Searches for movies and updates the state
   Future<void> searchMovies(String query) async {
+    print(" Searching for movies with query: $query");
     state = const AsyncValue.loading(); // Show loading state
     try {
       final movies = await repository.searchMovies(query);
+      print(" Movies fetched: ${movies.length}");
       state = AsyncValue.data(movies);
-    } catch (error) {
-      state = AsyncValue.error(error, StackTrace.current);
+    } catch (error, stackTrace) {
+      print(" Error fetching movies: $error");
+      state = AsyncValue.error(error, stackTrace);
     }
   }
 }
+
 
 /// Provides the state notifier for searching movies
 final movieSearchProvider =
@@ -33,3 +35,10 @@ StateNotifierProvider<MovieSearchNotifier, AsyncValue<List<MovieModel>>>((ref) {
   final repository = ref.watch(movieRepositoryProvider);
   return MovieSearchNotifier(repository);
 });
+
+/// Provider to fetch movie details based on IMDb ID
+final movieDetailsProvider = FutureProvider.family<MovieModel, String>((ref, imdbID) async {
+  final repository = ref.watch(movieRepositoryProvider);
+  return await repository.getMovieDetails(imdbID);
+});
+
