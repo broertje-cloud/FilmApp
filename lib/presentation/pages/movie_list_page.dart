@@ -48,15 +48,15 @@ class _MovieListPageState extends ConsumerState<MovieListPage> {
           Expanded(
             child: movieState.when(
               loading: () {
-                print("⏳ Loading movies...");
+                print(" Loading movies...");
                 return const Center(child: CircularProgressIndicator());
               },
               error: (error, stackTrace) {
-                print("❌ UI Error: $error");
+                print(" UI Error: $error");
                 return Center(child: Text("Error: $error")); // Show error message on screen
               },
               data: (movies) {
-                print("📃 UI Received ${movies.length} movies");
+                print(" UI Received ${movies.length} movies");
                 if (movies.isEmpty) {
                   return const Center(child: Text("No movies found."));
                 }
