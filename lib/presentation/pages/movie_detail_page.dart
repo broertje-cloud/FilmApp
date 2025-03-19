@@ -1,8 +1,8 @@
+import 'package:film_app/presentation/widgets/movie_poster.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:film_app/domain/movie_provider.dart';
 import 'package:film_app/presentation/widgets/ui_helpers.dart';
-
 
 /// Movie Details Page that shows information about a selected movie.
 class MovieDetailPage extends ConsumerWidget {
@@ -24,14 +24,9 @@ class MovieDetailPage extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
-                child: Image.network(
-                  movie.poster,
-                  width: 200,
-                  height: 300,
-                  fit: BoxFit.cover,
-                ),
-              ),
+              const SizedBox(height: 16), // Add spacing before the poster
+              MoviePoster(imageUrl: movie.poster),
+
               UIHelper.verticalSpaceMedium,
 
               Text(movie.title, style: AppTextStyles.heading),

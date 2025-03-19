@@ -9,9 +9,6 @@ class OmdbApi {
   Future<Map<String, dynamic>> fetchMovies(String query) async {
     final response = await http.get(Uri.parse('$baseUrl/?s=$query&apikey=62e795df'));
 
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
-
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
@@ -22,9 +19,6 @@ class OmdbApi {
   /// Fetches detailed information about a specific movie using its IMDb ID.
   Future<Map<String, dynamic>> fetchMovieDetails(String imdbID) async {
     final response = await http.get(Uri.parse('$baseUrl/?i=$imdbID&apikey=62e795df'));
-
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
 
     if (response.statusCode == 200) {
       return json.decode(response.body);

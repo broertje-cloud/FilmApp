@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:film_app/domain/movie_search_controller.dart';
 
-
-
 /// A reusable search bar widget.
 class SearchBarWidget extends ConsumerStatefulWidget {
   const SearchBarWidget({Key? key}) : super(key: key);
