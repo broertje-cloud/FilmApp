@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:film_app/domain/movie_model.dart';
 import 'package:film_app/domain/movie_provider.dart';
+import 'package:film_app/presentation/widgets/ui_helpers.dart';
+
 
 /// Movie Details Page that shows information about a selected movie.
 class MovieDetailPage extends ConsumerWidget {
@@ -31,14 +32,18 @@ class MovieDetailPage extends ConsumerWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-              const SizedBox(height: 16),
-              Text(movie.title, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-              const SizedBox(height: 8),
-              Text("Year: ${movie.year}", style: const TextStyle(fontSize: 16)),
-              const SizedBox(height: 8),
-              Text("Type: ${movie.type}", style: const TextStyle(fontSize: 16)),
-              const SizedBox(height: 8),
-              Text("IMDb ID: ${movie.imdbID}", style: const TextStyle(fontSize: 16, color: Colors.grey)),
+              UIHelper.verticalSpaceMedium,
+
+              Text(movie.title, style: AppTextStyles.heading),
+              UIHelper.verticalSpaceSmall,
+
+              Text("Year: ${movie.year}", style: AppTextStyles.subtitle),
+              UIHelper.verticalSpaceSmall,
+
+              Text("Type: ${movie.type}", style: AppTextStyles.body),
+              UIHelper.verticalSpaceSmall,
+
+              Text("IMDb ID: ${movie.imdbID}", style: AppTextStyles.caption),
             ],
           ),
         ),

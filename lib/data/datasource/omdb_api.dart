@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class OmdbApi {
-  final String apiKey = 'http://www.omdbapi.com/?i=tt3896198&apikey=62e795df'; // Replace with your actual API key
+  final String apiKey = 'http://www.omdbapi.com/?i=tt3896198&apikey=62e795df';
   final String baseUrl = 'https://www.omdbapi.com/';
 
   /// Fetches a list of movies based on a search query.
