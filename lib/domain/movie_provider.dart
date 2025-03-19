@@ -40,6 +40,3 @@ StateNotifierProvider<MovieSearchNotifier, AsyncValue<List<MovieModel>>>((ref) {
    final repository = ref.watch(movieRepositoryProvider);
    return await repository.getMovieDetails(imdbID);
  });
-
-// final FutureProvider movieDetailsProvider = FutureProvider.family<MovieModel, String>((ref, imdbID) async =>
-//   await ref.watch(movieRepositoryProvider).getMovieDetails(imdbID)) as FutureProvider;
